@@ -6,6 +6,10 @@ import { getBlockTime, getGas } from './utils/index.js';
 
 const { store } = useGlobalStore()
 
+const toScan = (url) => {
+  window.open(url, '_blank')
+}
+
 onMounted(() => {
   chainList.forEach(async (chain) => {
     getBlockTime(chain)
@@ -19,7 +23,7 @@ onMounted(() => {
     <div class="grid">
       <div class="gi" v-for="(chain, i) in store.state.chainList" :key="chain.chainId" :span="1">
         <div class="card">
-          <div class="chain-name flex-center-center">
+          <div class="chain-name flex-center-center" @click="toScan(chain.chainExplorer)">
             <img :src="chain.chainIcon" alt="chainIcon">
             <h1>{{ chain.chainName }}</h1>
           </div>
@@ -60,6 +64,7 @@ onMounted(() => {
   font-size: 16px;
   font-weight: 500;
   margin-bottom: 24px;
+  cursor: pointer;
 
   img {
     width: 24px;
