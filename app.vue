@@ -16,9 +16,9 @@ onMounted(() => {
 
 <template>
   <div style="padding: 24px;">
-    <n-grid x-gap="12" y-gap="12" :cols="4" class="grid">
-      <n-gi v-for="(chain, i) in store.state.chainList" :key="chain.chainId" :span="1">
-        <n-card content-class="card-content">
+    <div class="grid">
+      <div class="gi" v-for="(chain, i) in store.state.chainList" :key="chain.chainId" :span="1">
+        <div class="card">
           <div class="chain-name flex-center-center">
             <img :src="chain.chainIcon" alt="chainIcon">
             <h1>{{ chain.chainName }}</h1>
@@ -43,9 +43,9 @@ onMounted(() => {
               <span class="info-value">{{ chain.gas }} gwei</span>
             </div>
           </div>
-        </n-card>
-      </n-gi>
-    </n-grid>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -59,6 +59,7 @@ onMounted(() => {
 .chain-name {
   font-size: 16px;
   font-weight: 500;
+  margin-bottom: 24px;
 
   img {
     width: 24px;
@@ -69,6 +70,7 @@ onMounted(() => {
 .info {
   margin-top: 16px;
   width: 100%;
+  line-height: 1.4;
   .info-item {
     text-align: center;
     width: 50%;
@@ -81,6 +83,23 @@ onMounted(() => {
       font-size: 14px;
       font-weight: 500;
       color: #333;
+    }
+  }
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  
+  .card {
+    border-radius: 8px;
+    padding: 24px 0;
+    background-color: #fff;
+    transition: all 0.3s;
+    box-sizing: border-box;
+    border: 1px solid #f0f0f0;
+    &:hover {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
     }
   }
 }
